@@ -397,7 +397,7 @@ return {
     ['scaleBasePart'] = _scaleBasePart,
     ['scaleAttachment'] = _scaleAttachment,
     ['scaleMesh'] = _scaleMesh,
-    ['scaleFire'] = _scaleFire
+    ['scaleFire'] = _scaleFire,
     ['scaleParticle'] = _scaleParticle,
     ['scaleNumberSequence'] = _scaleNumberSequence
 }
