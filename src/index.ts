@@ -239,6 +239,15 @@ export function scaleDescendants(container: Instance, scale: ScaleInputType, ori
 			_scaleParticle(instance, scale);
 		} else if (instance.IsA("Texture")) {
 			scaleTexture(instance, scale, origin);
+		} else if (instance.IsA('JointInstance')) {
+			local c0NewPos = instance.C0.Position * scale
+			local c0RotX, c0RotY, c0RotZ = instance.C0:ToEulerAnglesXYZ()
+			
+			local c1NewPos = instance.C1.Position * scale
+			local c1RotX, c1RotY, c1RotZ = instance.C1:ToEulerAnglesXYZ()
+
+			instance.C0 = CFrame.new(c0NewPos) * CFrame.Angles(c0RotX, c0RotY, c0RotZ)
+			instance.C1 = CFrame.new(c1NewPos) * CFrame.Angles(c1RotX, c1RotY, c1RotZ)
 		}
 		if (!scaledChildren) {
 			scaleDescendants(instance, scale, origin, true);
