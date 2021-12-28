@@ -378,3 +378,26 @@ function _scaleNumberSequence(sequence, scale)
 	-- ▲ ReadonlyArray.map ▲
 	return NumberSequence.new(_newValue)
 end
+
+return {
+    ['averageNumbers'] = averageNumbers,
+    ['scaleSpecifier'] = scaleSpecifier,
+    ['scaleModel'] = scaleModel,
+    ['scalePart'] = scalePart,
+    ['lerpVector'] = lerpVector,
+    ['scaleVector'] = scaleVector,
+    ['scaleExplosion'] = scaleExplosion,
+    ['scaleTool'] = scaleTool,
+    ['disableWelds'] = disableWelds,
+    ['enableWelds'] = enableWelds,
+    ['scaleDescendants'] = scaleDescendants,
+    ['scaleTexture'] = scaleTexture,
+    ['centerToOrigin'] = _centerToOrigin,
+    ['minSide'] = _minSide,
+    ['scaleBasePart'] = _scaleBasePart,
+    ['scaleAttachment'] = _scaleAttachment,
+    ['scaleMesh'] = _scaleMesh,
+    ['scaleFire'] = _scaleFire
+    ['scaleParticle'] = _scaleParticle,
+    ['scaleNumberSequence'] = _scaleNumberSequence
+}
