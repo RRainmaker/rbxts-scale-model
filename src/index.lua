@@ -1,14 +1,6 @@
--- Compiled with roblox-ts v1.2.7
---[[
-	*
-	* @rbxts/scale-model
-	*
-	* USAGE:
-	* import { scaleModel } '@rbxts/scale-model';
-	*
-	* scaleModel(game.Workspace.MyModel, 7, Enum.NormalId.Bottom)
-	*
-]]
+-- This module was created by rbxts, all credits go to him
+-- This fork is to add a scaling of joint instances
+
 local function averageNumbers(numbers)
 	local count = #numbers
 	if count == 0 then
