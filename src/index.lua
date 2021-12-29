@@ -1,6 +1,14 @@
--- This file is simply the lua version of index.ts
--- All credits go to rbxts for creating this
-
+-- Compiled with roblox-ts v1.2.7
+--[[
+	*
+	* @rbxts/scale-model
+	*
+	* USAGE:
+	* import { scaleModel } '@rbxts/scale-model';
+	*
+	* scaleModel(game.Workspace.MyModel, 7, Enum.NormalId.Bottom)
+	*
+]]
 local function averageNumbers(numbers)
 	local count = #numbers
 	if count == 0 then
@@ -173,8 +181,8 @@ local function scaleExplosion(explosion, scale)
 		_result = _position * _asNumber
 	end
 	explosion.Position = _result
-	explosion.BlastPressure = explosion.BlastPressure * sspec.asNumber
-	explosion.BlastRadius = explosion.BlastRadius * sspec.asNumber
+	explosion.BlastPressure *= sspec.asNumber
+	explosion.BlastRadius *= sspec.asNumber
 end
 --[[
 	*
@@ -224,7 +232,12 @@ local function enableWelds(welds)
 	end
 	-- ▲ ReadonlyMap.forEach ▲
 end
-
+--[[
+	*
+	* Scale an array of Instances uniformly
+	* @param explosion The Instances to scale
+	* @param scale The amount to scale.  > 1 is bigger, < 1 is smaller
+]]
 local _scaleAttachment, _scaleMesh, _scaleFire, _scaleParticle, scaleTexture
 function scaleDescendants(container, scale, origin, recur)
 	if recur == nil then
@@ -263,10 +276,10 @@ function scaleDescendants(container, scale, origin, recur)
 			_scaleParticle(instance, scale)
 		elseif instance:IsA("Texture") then
 			scaleTexture(instance, scale, origin)
-        elseif instance:IsA('JointInstance') then
-            local c0NewPos = instance.C0.Position * scale
+		elseif instance:IsA('JointInstance') then
+			local c0NewPos = instance.C0.Position * scale
 			local c0RotX, c0RotY, c0RotZ = instance.C0:ToEulerAnglesXYZ()
-			
+
 			local c1NewPos = instance.C1.Position * scale
 			local c1RotX, c1RotY, c1RotZ = instance.C1:ToEulerAnglesXYZ()
 
@@ -283,10 +296,10 @@ function scaleDescendants(container, scale, origin, recur)
 end
 function scaleTexture(texture, scale, origin)
 	local sspecV2 = ScaleSpecifier.new(scale).asVector2
-	texture.OffsetStudsU = texture.OffsetStudsU * sspecV2.X
-	texture.OffsetStudsV = texture.OffsetStudsV * sspecV2.Y
-	texture.StudsPerTileU = texture.StudsPerTileU * sspecV2.X
-	texture.StudsPerTileV = texture.StudsPerTileV * sspecV2.Y
+	texture.OffsetStudsU *= sspecV2.X
+	texture.OffsetStudsV *= sspecV2.Y
+	texture.StudsPerTileU *= sspecV2.X
+	texture.StudsPerTileV *= sspecV2.Y
 end
 local _minSide
 function _centerToOrigin(center, size, position)
@@ -345,7 +358,6 @@ function _scaleBasePart(part, scale, origin)
 	part.Size = _result
 	part.CFrame = CFrame.new(pos) * angle
 end
-
 function _scaleAttachment(attachment, scale, _origin)
 	local parent = attachment:FindFirstAncestorWhichIsA("BasePart")
 	if parent then
@@ -378,26 +390,13 @@ function _scaleNumberSequence(sequence, scale)
 	-- ▲ ReadonlyArray.map ▲
 	return NumberSequence.new(_newValue)
 end
-
 return {
-    ['averageNumbers'] = averageNumbers,
-    ['scaleSpecifier'] = scaleSpecifier,
-    ['scaleModel'] = scaleModel,
-    ['scalePart'] = scalePart,
-    ['lerpVector'] = lerpVector,
-    ['scaleVector'] = scaleVector,
-    ['scaleExplosion'] = scaleExplosion,
-    ['scaleTool'] = scaleTool,
-    ['disableWelds'] = disableWelds,
-    ['enableWelds'] = enableWelds,
-    ['scaleDescendants'] = scaleDescendants,
-    ['scaleTexture'] = scaleTexture,
-    ['centerToOrigin'] = _centerToOrigin,
-    ['minSide'] = _minSide,
-    ['scaleBasePart'] = _scaleBasePart,
-    ['scaleAttachment'] = _scaleAttachment,
-    ['scaleMesh'] = _scaleMesh,
-    ['scaleFire'] = _scaleFire,
-    ['scaleParticle'] = _scaleParticle,
-    ['scaleNumberSequence'] = _scaleNumberSequence
+	scaleModel = scaleModel,
+	scalePart = scalePart,
+	scaleVector = scaleVector,
+	scaleExplosion = scaleExplosion,
+	scaleTool = scaleTool,
+	scaleDescendants = scaleDescendants,
+	scaleTexture = scaleTexture,
+	ScaleSpecifier = ScaleSpecifier
 }
